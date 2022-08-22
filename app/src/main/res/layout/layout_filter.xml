@@ -6,7 +6,7 @@
     android:layout_margin="@dimen/content_padding"
     android:paddingHorizontal="@dimen/content_padding"
     android:paddingTop="@dimen/content_padding_x_small"
-    android:paddingBottom="@dimen/content_padding_x_small"
+    android:paddingBottom="@dimen/content_padding"
     android:background="@drawable/grey_round_cornor_background">
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="@string/label_filters"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_size_24"
+        android:textSize="@dimen/text_size_21"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 

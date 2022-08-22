@@ -24,7 +24,7 @@ class LandingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing)
-
+        setupTitle()
         landingAdapter = LandingAdapter(viewModel = viewModel).apply {
             FilterManager(
                 makeView = findViewById(R.id.make),
@@ -41,6 +41,10 @@ class LandingActivity : AppCompatActivity() {
 
         setObservers()
         viewModel.fetchCarsList()
+    }
+
+    private fun setupTitle() {
+        this.supportActionBar?.hide()
     }
 
     private fun setObservers() {
