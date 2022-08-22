@@ -30,6 +30,7 @@
         android:padding="@dimen/margin_x_small"
         android:background="@drawable/white_round_cornor_background"
         android:inputType="text"
+        android:imeOptions="actionSearch"
         android:autofillHints="" />
 
     <EditText
@@ -44,5 +45,6 @@
         android:background="@drawable/white_round_cornor_background"
         android:autofillHints=""
         android:inputType="text"
+        android:imeOptions="actionSearch"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

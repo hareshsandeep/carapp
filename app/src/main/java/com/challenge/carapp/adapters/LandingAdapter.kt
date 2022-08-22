@@ -1,15 +1,14 @@
 package com.challenge.carapp.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RatingBar
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.challenge.carapp.R
+import com.challenge.carapp.components.FilterManager
 import com.challenge.carapp.models.CarsModel
 import com.challenge.carapp.util.getImagePath
 import com.challenge.carapp.util.priceInThousands
@@ -17,7 +16,13 @@ import com.challenge.carapp.viewmodels.LandingViewModel
 
 class LandingAdapter(
     private val viewModel: LandingViewModel
-) : RecyclerView.Adapter<LandingAdapter.CarViewHolder>() {
+) : RecyclerView.Adapter<LandingAdapter.CarViewHolder>(),
+    FilterManager.FilterChangeListener,
+    Filterable{
+    private val separator = "||||%$#"
+    private val data: List<CarsModel>
+        get() = viewModel.carListLiveData.value ?: emptyList()
+    private var filteredData: List<CarsModel>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder =
         CarViewHolder(
@@ -27,7 +32,7 @@ class LandingAdapter(
         )
 
     override fun onBindViewHolder(holder: CarViewHolder, position: Int) {
-        val item = viewModel.carListLiveData.value?.get(position)
+        val item = filteredData?.get(position)
         require(item != null) { "Invalid state. Item can't be null" }
 
         holder.apply {
@@ -96,8 +101,7 @@ class LandingAdapter(
         }
     }
 
-    override fun getItemCount(): Int =
-        viewModel.carListLiveData.value?.size ?: 0
+    override fun getItemCount(): Int = filteredData?.size ?: 0
 
     class CarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.image)
@@ -107,12 +111,54 @@ class LandingAdapter(
         val prosConsContainer: View = itemView.findViewById(R.id.pros_cons_container)
         val prosLabel: TextView = itemView.findViewById(R.id.pros_label)
         val prosContainer: LinearLayout = itemView.findViewById(R.id.pros_container)
-
         val consLabel: TextView = itemView.findViewById(R.id.cons_label)
         val consContainer: LinearLayout = itemView.findViewById(R.id.cons_container)
     }
 
     fun refresh() {
+        filteredData = data
         notifyItemRangeChanged(0, itemCount - 1)
+    }
+
+    override fun onSearchClicked(make: String, model: String, closeKeyboard: Boolean) {
+        if(closeKeyboard) {
+            viewModel.closeKeyBoard()
+        }
+        filter.filter("$make$separator$model")
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val searchString = constraint?.toString() ?: ""
+                return FilterResults().apply { values = filteredData(searchString) }
+            }
+
+            @SuppressLint("NotifyDataSetChanged")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                filteredData = if (results?.values == null)
+                    emptyList()
+                else
+                    results.values as List<CarsModel>
+                notifyDataSetChanged()
+            }
+        }
+    }
+
+    private fun filteredData(searchString: String): List<CarsModel> {
+        val makeString = searchString.split(separator)[0]
+        val modelString = searchString.split(separator)[1]
+
+        if (makeString.isEmpty() && modelString.isEmpty()) {
+            return data
+        }
+
+        val filteredList = ArrayList<CarsModel>()
+        data.filter { item ->
+            item.make?.contains(makeString, true) ?: false
+                    && item.model?.contains(modelString, true) ?: false
+        }.forEach { filteredList.add(it) }
+
+        return filteredList
     }
 }

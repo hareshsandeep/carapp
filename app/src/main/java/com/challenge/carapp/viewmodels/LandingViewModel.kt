@@ -19,6 +19,13 @@ class LandingViewModel(
         get() = _carListLiveData
     private val _carListLiveData = MutableLiveData<List<CarsModel>?>()
 
+    /**
+     * LiveData that closes keyboard.
+     */
+    val closeKeyBoardObserver: LiveData<Unit>
+        get() = _closeKeyBoardLiveData
+    private val _closeKeyBoardLiveData = MutableLiveData<Unit>()
+
     val expanded = MutableLiveData<Int>().apply {
         postValue(0)
     }
@@ -55,5 +62,9 @@ class LandingViewModel(
      */
     private fun collapse(position: Int) {
         collapsed.postValue(position)
+    }
+
+    fun closeKeyBoard() {
+        _closeKeyBoardLiveData.postValue(Unit)
     }
 }
