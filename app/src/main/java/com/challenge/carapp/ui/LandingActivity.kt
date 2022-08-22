@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.challenge.carapp.LandingRepository
 import com.challenge.carapp.R
 import com.challenge.carapp.adapters.LandingAdapter
-import com.challenge.carapp.components.FilterManager
 import com.challenge.carapp.components.setDivider
-import com.challenge.carapp.util.closeKeyboard
 import com.challenge.carapp.viewmodels.LandingViewModel
 import com.challenge.carapp.viewmodels.LandingViewModelFactory
 
@@ -25,13 +23,12 @@ class LandingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing)
         setupTitle()
-        landingAdapter = LandingAdapter(viewModel = viewModel).apply {
-            FilterManager(
-                makeView = findViewById(R.id.make),
-                modelView = findViewById(R.id.model),
-                this
-            )
-        }
+        landingAdapter = LandingAdapter(
+            context = this,
+            viewModel = viewModel,
+            makeView = findViewById(R.id.make),
+            modelView = findViewById(R.id.model),
+        )
 
         findViewById<RecyclerView>(R.id.carsRecyclerView).apply {
             layoutManager = LinearLayoutManager(context)
@@ -58,10 +55,6 @@ class LandingActivity : AppCompatActivity() {
 
         viewModel.expanded.observe(this) {
             landingAdapter.notifyItemChanged(it)
-        }
-
-        viewModel.closeKeyBoardObserver.observe(this) {
-            this.closeKeyboard()
         }
     }
 }

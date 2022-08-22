@@ -1,6 +1,7 @@
 package com.challenge.carapp.adapters
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,21 +9,33 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.challenge.carapp.R
-import com.challenge.carapp.components.FilterManager
 import com.challenge.carapp.models.CarsModel
+import com.challenge.carapp.util.getCarMakeInfoList
+import com.challenge.carapp.util.getCarModelInfoList
 import com.challenge.carapp.util.getImagePath
 import com.challenge.carapp.util.priceInThousands
 import com.challenge.carapp.viewmodels.LandingViewModel
 
+const val ANY_MAKE = "Any make"
+const val ANY_MODEL = "Any model"
+
 class LandingAdapter(
-    private val viewModel: LandingViewModel
+    private val context: Context,
+    private val viewModel: LandingViewModel,
+    private val makeView: Spinner,
+    private val modelView: Spinner,
 ) : RecyclerView.Adapter<LandingAdapter.CarViewHolder>(),
-    FilterManager.FilterChangeListener,
-    Filterable{
+    Filterable,
+    AdapterView.OnItemSelectedListener {
     private val separator = "||||%$#"
     private val data: List<CarsModel>
         get() = viewModel.carListLiveData.value ?: emptyList()
     private var filteredData: List<CarsModel>? = null
+
+    init {
+        makeView.onItemSelectedListener = this
+        modelView.onItemSelectedListener = this
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarViewHolder =
         CarViewHolder(
@@ -117,14 +130,28 @@ class LandingAdapter(
 
     fun refresh() {
         filteredData = data
+        setupSpinners()
         notifyItemRangeChanged(0, itemCount - 1)
     }
 
-    override fun onSearchClicked(make: String, model: String, closeKeyboard: Boolean) {
-        if(closeKeyboard) {
-            viewModel.closeKeyBoard()
+    private fun setupSpinners() {
+        ArrayAdapter(
+            context,
+            android.R.layout.simple_spinner_dropdown_item,
+            data.getCarMakeInfoList()
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            makeView.adapter = adapter
         }
-        filter.filter("$make$separator$model")
+
+        ArrayAdapter(
+            context,
+            android.R.layout.simple_spinner_dropdown_item,
+            data.getCarModelInfoList()
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            modelView.adapter = adapter
+        }
     }
 
     override fun getFilter(): Filter {
@@ -160,5 +187,21 @@ class LandingAdapter(
         }.forEach { filteredList.add(it) }
 
         return filteredList
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        var make = makeView.selectedItem.toString()
+        var model = modelView.selectedItem.toString()
+        if (make.contains(ANY_MAKE)) {
+            make = ""
+        }
+        if (model.contains(ANY_MODEL)) {
+            model = ""
+        }
+        filter.filter("$make$separator$model")
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+        TODO("Not yet implemented")
     }
 }

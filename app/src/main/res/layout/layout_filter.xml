@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/content_padding"
+    android:background="@drawable/grey_round_cornor_background"
     android:paddingHorizontal="@dimen/content_padding"
     android:paddingTop="@dimen/content_padding_x_small"
-    android:paddingBottom="@dimen/content_padding"
-    android:background="@drawable/grey_round_cornor_background">
+    android:paddingBottom="@dimen/content_padding">
 
     <TextView
         android:id="@+id/filter"
@@ -16,35 +16,34 @@
         android:text="@string/label_filters"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_21"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <Spinner
         android:id="@+id/make"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="@dimen/margin_small"
-        app:layout_constraintTop_toBottomOf="@id/filter"
-        android:hint="@string/hint_any_make"
-        android:textStyle="bold"
-        android:padding="@dimen/margin_x_small"
+        android:autofillHints=""
         android:background="@drawable/white_round_cornor_background"
-        android:inputType="text"
+        android:hint="@string/hint_any_make"
         android:imeOptions="actionSearch"
-        android:autofillHints="" />
+        android:inputType="text"
+        android:padding="@dimen/margin_x_small"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/filter" />
 
-    <EditText
+    <Spinner
         android:id="@+id/model"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="@dimen/content_padding"
-        app:layout_constraintTop_toBottomOf="@id/make"
-        android:hint="@string/hint_any_model"
-        android:textStyle="bold"
-        android:padding="@dimen/margin_x_small"
-        android:background="@drawable/white_round_cornor_background"
         android:autofillHints=""
-        android:inputType="text"
+        android:background="@drawable/white_round_cornor_background"
+        android:hint="@string/hint_any_model"
         android:imeOptions="actionSearch"
-        />
+        android:inputType="text"
+        android:padding="@dimen/margin_x_small"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/make" />
 </androidx.constraintlayout.widget.ConstraintLayout>
