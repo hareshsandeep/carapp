@@ -6,5 +6,8 @@
     <string name="content_price">Price: %dk</string>
     <string name="label_pros">Pros :</string>
     <string name="label_cons">Cons :</string>
+    <string name="label_filters">Filters</string>
+    <string name="hint_any_make">Any make</string>
+    <string name="hint_any_model">Any model</string>
 
 </resources>

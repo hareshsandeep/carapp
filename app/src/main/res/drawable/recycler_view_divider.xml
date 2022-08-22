@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:inset="16dp">
+    android:insetTop="@dimen/content_padding_x_small"
+    android:insetBottom="@dimen/content_padding_x_small"
+    android:insetLeft="@dimen/content_padding"
+    android:insetRight="@dimen/content_padding"
+    >
 
     <shape>
         <size android:height="3dp" />
-        <solid android:color="@color/orange" />
+        <solid android:color="@color/orange_dark" />
     </shape>
 
 </inset>

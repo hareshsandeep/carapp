@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_size_38">38sp</dimen>
-    <dimen name="text_size_24">24sp</dimen>
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_21">21sp</dimen>
+    <dimen name="text_size_24">24sp</dimen>
+    <dimen name="text_size_38">38sp</dimen>
+
     <dimen name="margin_x_small">6dp</dimen>
     <dimen name="margin_small">10dp</dimen>
-    <dimen name="content_padding">16dp</dimen>
-    <dimen name="label_padding">36dp</dimen>
+
+    <dimen name="content_padding_x_small">12dp</dimen>
+    <dimen name="content_padding_small">16dp</dimen>
+    <dimen name="content_padding">20dp</dimen>
+    <dimen name="content_padding_large">24dp</dimen>
+    <dimen name="content_padding_x_large">36dp</dimen>
+
     <dimen name="app_bar_height">250dp</dimen>
     <dimen name="row_item_bottom_padding">10dp</dimen>
     <dimen name="car_icon_width">160dp</dimen>
     <dimen name="car_item_height">116dp</dimen>
-
+    <dimen name="round_corner_radius">6dp</dimen>
 
 </resources>

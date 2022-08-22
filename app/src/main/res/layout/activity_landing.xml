@@ -75,10 +75,18 @@
             tools:context=".ui.LandingActivity"
             android:paddingTop="@dimen/content_padding">
 
+            <include android:id="@+id/filter"
+                layout="@layout/layout_filter"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/carsRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/content_padding_x_large"
+                app:layout_constraintTop_toBottomOf="@id/filter"
+                app:layout_constraintStart_toStartOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
