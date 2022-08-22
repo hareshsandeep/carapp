@@ -1,6 +1,6 @@
 # carapp
 
-This is a car app that lists various cars and filters them buy their make and the model.
+This is a car app that lists various cars and filters them by their make and the model.
 
 
 | Top bar             |  Bottom bar |
