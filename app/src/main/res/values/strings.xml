@@ -4,5 +4,7 @@
     <string name="header_desc_get_your_s_now">Get your\'s now.</string>
     <string name="content_desc_car_image">Car image</string>
     <string name="content_price">Price: %dk</string>
+    <string name="label_pros">Pros :</string>
+    <string name="label_cons">Cons :</string>
 
 </resources>

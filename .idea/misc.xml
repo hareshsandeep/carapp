@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/bullet_point.xml" value="0.148" />
         <entry key="app/src/main/res/drawable/recycler_view_divider.xml" value="0.2395" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_bullet_point.xml" value="0.67" />
         <entry key="app/src/main/res/layout/layout_filter.xml" value="0.31435897435897436" />
         <entry key="app/src/main/res/layout/row_item_car_details.xml" value="0.33" />
       </map>

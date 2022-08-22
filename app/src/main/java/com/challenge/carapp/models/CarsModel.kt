@@ -10,5 +10,6 @@ data class CarsModel(
     var marketPrice: Int? = null,
     var model: String? = null,
     var prosList: List<String> = arrayListOf(),
-    var rating: Int? = null
+    var rating: Int? = null,
+    var isExpanded: Boolean = false,
 )

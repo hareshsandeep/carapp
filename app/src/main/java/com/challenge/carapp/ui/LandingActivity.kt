@@ -32,9 +32,22 @@ class LandingActivity : AppCompatActivity() {
             setDivider(R.drawable.recycler_view_divider)
             carsRecyclerView?.adapter = landingAdapter
         }
+
+        setObservers()
+        viewModel.fetchCarsList()
+    }
+
+    private fun setObservers() {
         viewModel.carListLiveData.observe(this) {
             landingAdapter.refresh()
         }
-        viewModel.fetchCarsList()
+
+        viewModel.collapsed.observe(this) {
+            landingAdapter.notifyItemChanged(it)
+        }
+
+        viewModel.expanded.observe(this) {
+            landingAdapter.notifyItemChanged(it)
+        }
     }
 }

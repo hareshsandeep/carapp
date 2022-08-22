@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
     android:background="@color/light_gray"
     android:paddingBottom="@dimen/row_item_bottom_padding">
 
@@ -11,34 +12,34 @@
         android:id="@+id/image"
         android:layout_width="@dimen/car_icon_width"
         android:layout_height="@dimen/car_item_height"
+        android:contentDescription="@string/content_desc_car_image"
+        android:padding="@dimen/content_padding"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/header_tacoma"
-        android:padding="@dimen/content_padding"
-        android:contentDescription="@string/content_desc_car_image"/>
+        tools:srcCompat="@drawable/header_tacoma" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/content_padding"
+        android:textColor="@color/text_color_gray"
         android:textSize="@dimen/text_size_24"
         android:textStyle="bold"
-        android:textColor="@color/text_color_gray"
-        app:layout_constraintStart_toEndOf="@+id/image"
+        app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingTop="@dimen/content_padding"
         tools:text="Alpine roadster" />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Price: 120k"
+        android:textColor="@color/text_color_gray"
         android:textSize="@dimen/text_size_18"
         android:textStyle="bold"
-        android:textColor="@color/text_color_gray"
-        app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintStart_toEndOf="@id/image"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        tools:text="Price: 120k" />
 
     <RatingBar
         android:id="@+id/ratings"
@@ -46,7 +47,68 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/content_padding"
-        app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/price" />
+        app:layout_constraintStart_toEndOf="@id/image"
+        app:layout_constraintTop_toBottomOf="@id/price" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pros_cons_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/label_padding"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image"
+        tools:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/pros_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_pros"
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/text_size_24"
+            android:textStyle="bold"
+            android:typeface="sans"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/pros_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pros_label"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/cons_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_cons"
+            android:textColor="@color/text_color_gray"
+            android:textSize="@dimen/text_size_24"
+            android:textStyle="bold"
+            android:typeface="sans"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pros_container"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/cons_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cons_label"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

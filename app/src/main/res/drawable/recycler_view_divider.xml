@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:inset="10dp">
+    android:inset="16dp">
 
     <shape>
-        <size android:height="2dp" />
+        <size android:height="3dp" />
         <solid android:color="@color/orange" />
     </shape>
 
