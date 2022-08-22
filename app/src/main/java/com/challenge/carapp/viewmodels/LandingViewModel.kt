@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.challenge.carapp.LandingRepository
 import com.challenge.carapp.models.CarsModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LandingViewModel(
@@ -38,8 +39,8 @@ class LandingViewModel(
      * Fetches list of cars.
      */
     fun fetchCarsList() {
-        viewModelScope.launch {
-            val carList = repo.fetchCarsList()
+        viewModelScope.launch(Dispatchers.IO) {
+            val carList = repo.getCarsList()
             _carListLiveData.postValue(carList)
         }
     }
