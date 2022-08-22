@@ -45,7 +45,7 @@
                     android:id="@+id/desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_small"
+                    android:layout_marginBottom="@dimen/content_padding_large"
                     android:paddingHorizontal="@dimen/content_padding"
                     android:text="@string/header_desc_get_your_s_now"
                     android:textColor="@color/white"
